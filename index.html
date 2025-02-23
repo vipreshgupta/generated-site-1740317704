@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enchanting Whimsical Online Bookstore</title>
+    <style>
+        /* Color Scheme */
+        :root {
+            --deep-mahogany: #4A2C2A;
+            --soft-amber: #FFBF00;
+            --forest-green: #228B22;
+            --gold: #FFD700;
+            --bronze: #CD7F32;
+            --light-amber: rgba(255, 191, 0, 0.1);
+            --light-green: rgba(34, 139, 34, 0.1);
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: var(--deep-mahogany);
+            color: var(--soft-amber);
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Dark Mode */
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--deep-mahogany);
+            z-index: 1000;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-link {
+            color: var(--soft-amber);
+            text-decoration: none;
+            padding: 10px 15px;
+            border: 1px solid var(--soft-amber);
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-link:hover {
+            background-color: var(--soft-amber);
+            color: var(--deep-mahogany);
+        }
+
+        /* Homepage Banner */
+        .banner {
+            position: relative;
+            height: 300px;
+            background: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .banner-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .banner h1 {
+            font-size: 3em;
+            color: var(--gold);
+            text-shadow: 2px 2px 4px var(--deep-mahogany);
+        }
+
+        /* Floating Books */
+        .floating-book {
+            position: absolute;
+            width: 80px;
+            height: 100px;
+            background: url('https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80') no-repeat center center;
+            background-size: cover;
+            animation: float 6s ease-in-out infinite;
+            border: 2px solid var(--bronze);
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .book1 { top: 20%; left: 10%; animation-delay: 0s; }
+        .book2 { top: 60%; left: 80%; animation-delay: 2s; }
+        .book3 { top: 40%; left: 30%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Owl Animation */
+        .owl {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background: url('https://cdn.pixabay.com/photo/2016/03/31/19/58/cartoon-1295429_960_720.png') no-repeat center center;
+            background-size: contain;
+            animation: fly 8s linear infinite;
+            cursor: pointer;
+        }
+
+        @keyframes fly {
+            0% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(-50px) rotate(-10deg); }
+            50% { transform: translateX(-100px) rotate(-20deg); }
+            75% { transform: translateX(-50px) rotate(-10deg); }
+            100% { transform: translateX(0) rotate(0deg); }
+        }
+
+        /* Category Sections */
+        .category-section {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .category-section h2 {
+            font-size: 2.5em;
+            color: var(--gold);
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px var(--deep-mahogany);
+        }
+
+        .bookshelf {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            perspective: 1000px;
+        }
+
+        .book {
+            width: 150px;
+            height: 220px;
+            background-color: var(--forest-green);
+            border: 3px solid var(--bronze);
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .book:hover {
+            transform: scale(1.05) rotateY(10deg);
+        }
+
+        .book img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+
+        /* Candlelight Effect */
+        .candlelight {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background: url('https://cdn.pixabay.com/photo/2017/01/31/19/09/candle-2026474_960_720.png') no-repeat center center;
+            background-size: contain;
+            filter: drop-shadow(0 0 5px var(--gold));
+            animation: flicker 2s ease-in-out infinite;
+        }
+
+        .candle1 { top: 10px; left: 10px; }
+        .candle2 { bottom: 10px; right: 10px; }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 10px 40px 10px 20px;
+            border: 2px solid var(--soft-amber);
+            border-radius: 20px;
+            background-color: rgba(255, 191, 0, 0.2);
+            color: var(--deep-mahogany);
+            font-size: 1em;
+            outline: none;
+        }
+
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            color: var(--deep-mahogany);
+            font-size: 1.2em;
+        }
+
+        /* Mystery Book Section */
+        .mystery-book {
+            position: relative;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .mystery-book h2 {
+            font-size: 2.5em;
+            color: var(--gold);
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px var(--deep-mahogany);
+        }
+
+        .hidden-door {
+            width: 200px;
+            height: 300px;
+            background: url('https://cdn.pixabay.com/photo/2017/08/07/14/02/people-2604149_960_720.jpg') no-repeat center center;
+            background-size: cover;
+            border: 5px solid var(--bronze);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+            margin: 0 auto;
+            cursor: pointer;
+            transition: transform 0.5s;
+        }
+
+        .hidden-door:hover {
+            transform: scale(1.05) rotate(-5deg);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--deep-mahogany);
+            color: var(--soft-amber);
+            border-top: 2px solid var(--bronze);
+        }
+
+        /* Accessibility */
+        [aria-hidden="true"] {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .nav-link {
+                margin: 5px 0;
+            }
+
+            .banner {
+                height: 200px;
+            }
+
+            .banner h1 {
+                font-size: 2em;
+            }
+
+            .floating-book {
+                width: 60px;
+                height: 80px;
+            }
+
+            .bookshelf {
+                gap: 10px;
+            }
+
+            .book {
+                width: 120px;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav-container">
+        <nav class="navbar">
+            <a href="#" class="nav-link">Home</a>
+            <a href="#" class="nav-link">Fiction</a>
+            <a href="#" class="nav-link">Non-Fiction</a>
+            <a href="#" class="nav-link">Mystery</a>
+            <a href="#" class="nav-link">Contact</a>
+        </nav>
+    </div>
+
+    <!-- Homepage Banner -->
+    <section class="banner">
+        <div class="banner-content">
+            <h1>Welcome to the Enchanted Library</h1>
+        </div>
+        <div class="floating-book book1"></div>
+        <div class="floating-book book2"></div>
+        <div class="floating-book book3"></div>
+        <div class="owl" onclick="showRecommendation()"></div>
+    </section>
+
+    <!-- Category Sections -->
+    <section class="category-section">
+        <h2>Fiction</h2>
+        <div class="bookshelf">
+            <div class="book"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="Fiction Book 1"></div>
+            <div class="book"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="Fiction Book 2"></div>
+            <div class="book"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="Fiction Book 3"></div>
+        </div>
+    </section>
+
+    <section class="category-section">
+        <h2>Non-Fiction</h2>
+        <div class="bookshelf">
+            <div class="book"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="Non-Fiction Book 1"></div>
+            <div class="book"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="Non-Fiction Book 2"></div>
+            <div class="book"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="Non-Fiction Book 3"></div>
+        </div>
+    </section>
+
+    <!-- Mystery Book Section -->
+    <section class="mystery-book">
+        <h2>Mystery Book of the Month</h2>
+        <div class="hidden-door" onclick="revealMysteryBook()"></div>
+    </section>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input type="text" class="search-bar" placeholder="Search for a book..." aria-label="Search">
+        <span class="search-icon">&#128269;</span>
+    </div>
+
+    <!-- Candlelight Effect -->
+    <div class="candlelight candle1"></div>
+    <div class="candlelight candle2"></div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Enchanted Library. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Owl Recommendation
+        function showRecommendation() {
+            alert("Hoot! I recommend 'The Magical Forest' for your next read!");
+        }
+
+        // Reveal Mystery Book
+        function revealMysteryBook() {
+            alert("Congratulations! You've unlocked this month's mystery book: 'Secrets of the Hidden Library'!");
+        }
+
+        // Dark Mode Toggle (Placeholder)
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        // Dynamic Bookshelf (Placeholder)
+        function rearrangeShelves() {
+            // Logic to rearrange books on scroll
+        }
+
+        window.addEventListener('scroll', rearrangeShelves);
+    </script>
+</body>
+</html>
